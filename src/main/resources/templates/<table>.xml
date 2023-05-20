@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <tr>
+      <th>Emp Name</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <form action="/attendance" method="post">
+      <!-- Loop through each employee and create a row in the table -->
+      <tr th:each="item : ${data}">
+        <td th:text="${item.empName}"></td>
+        <td>
+          <!-- Create a dropdown menu for attendance -->
+          <select name="attendance[]" id="attendance">
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+            <option value="late">Late</option>
+          </select>
+        </td>
+      </tr>
+      <!-- Add a submit button to send the attendance data to the server -->
+      <tr>
+        <td colspan="2"><input type="submit" value="Submit Attendance"></td>
+      </tr>
+    </form>
+  </tbody>
+</table>
