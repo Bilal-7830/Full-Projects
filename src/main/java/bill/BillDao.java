@@ -7,28 +7,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import GenerateOrder.OrderDetailBean;
+import org.slf4j.Logger;
+
 import sendorder.OrderMedicineBean;
+import utils.AppLogger;
 import utils.CloseResources;
 import utils.DBConnection;
 import utils.QueryUtil;
 
 public class BillDao {
 	static Connection con = null;
+	static AppLogger appLogger = new AppLogger();
+	static Logger logger = appLogger.getLogger();
 
 	public static void addBillToDB(String email, String billId, int total, Date date) {
 		con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
 		int cnt = 1;
 		try {
+			logger.info("Adding bill to DB");
 			pdsm = con.prepareStatement(QueryUtil.ADD_BILL_TO_DB_QUERY);
 			pdsm.setString(cnt++, email);
 			pdsm.setString(cnt++, billId);
 			pdsm.setFloat(cnt++, total);
 			pdsm.setDate(cnt++, date);
 			pdsm.executeUpdate();
+			logger.info("Added bill in DB Successfully");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.info("Failed to add bill in db" + e.getMessage());
 		}
 	}
 
@@ -36,6 +42,7 @@ public class BillDao {
 		PreparedStatement pdsm = null;
 		System.out.println("db dose updated");
 		try {
+			logger.info("Adding medicines of bill in DB");
 			for (BillBean billBean : data) {
 				int cnt = 1;
 				pdsm = con.prepareStatement(QueryUtil.ADD_BILL_MEDICINE_TO_DB_QUERY);
@@ -49,20 +56,22 @@ public class BillDao {
 				pdsm.setString(cnt++, billBean.getDose());
 				pdsm.executeUpdate();
 			}
+			logger.info("Bill medicines added in DB successfully");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.error("Failed to adding medicines in db " + e.getMessage());
 		} finally {
 			CloseResources.close(con, pdsm);
 		}
 	}
 
 	public static float calculateFullDaySale(Date date) {
-		Connection con = DBConnection.createConnection();
+		con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
 		ResultSet rs = null;
 		float sale = 0;
 		int cnt = 1;
 		try {
+			logger.info("calculating day sale");
 			pdsm = con.prepareStatement(QueryUtil.FULL_DAY_SALE_QUERY);
 			pdsm.setDate(cnt, date);
 			rs = pdsm.executeQuery();
@@ -73,7 +82,7 @@ public class BillDao {
 		} finally {
 			CloseResources.close(con, rs, pdsm);
 		}
-		System.out.println("sale = " + sale);
+		logger.info("sale callculated successfully sale amount is : " + sale);
 		return sale;
 	}
 
@@ -90,9 +99,9 @@ public class BillDao {
 				pdsm.setString(cnt++, bill.getCategory());
 				pdsm.execute();
 			}
-			System.out.println("Done++++++>>>>>>updateBillMedicineQntINDB");
+			logger.info("updated -----updateBillMedicineQntINDB");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
 			CloseResources.close(con, pdsm);
 		}
@@ -111,9 +120,9 @@ public class BillDao {
 				pdsm.setString(cnt++, bill.getCategory());
 				pdsm.execute();
 			}
-			System.out.println("done==>updateOrderMedicineQntINDB");
+			logger.info("updated -----updateOrderMedicineQntINDB");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 		} finally {
 			CloseResources.close(con, pdsm);
 		}

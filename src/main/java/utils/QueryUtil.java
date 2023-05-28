@@ -15,12 +15,18 @@ public class QueryUtil {
 	public static final String LEND_MEDICINE_QUERY = "update m_bill_details set lend_amount = ? where bill_pid = ?";
 	public static final String RecentTransactionQuery = "select email,bill_pid,amount,b_date,lend_amount from m_bill_details where b_date = ?";
 	public static final String LEND_BALANCE_QUERY = "select sum(lend_amount) from m_bill_details where email = ?";
-	public static final String RECENT_CUSTOMER_TRANSACTION_QUERY = "select email,bill_pid,amount,lend_amount from m_bill_details where email = ?";
+	public static final String RECENT_CUSTOMER_TRANSACTION_QUERY = "select email,bill_pid,amount,lend_amount, b_date from m_bill_details where email = ?";
 	public static final String DOSE_QUERY = "Select category,medicine_name,dose from m_medicine_bill where bill_id = ?";
+
 	public static final String GET_UPDATE_MEDICINE_QUANTITY_QUERY(int qnt) {
-		return "update me_medicine_store set qnty = qnty + "+qnt+"where medicine_name = ? and category = ?";
+		return "update me_medicine_store set qnty = qnty + " + qnt + "where medicine_name = ? and category = ?";
 	}
+
 	public static final String Auth_CUSTOMER_QUERY = "select name from m_customer_details where email = ? and passward = ?";
 	public static final String REGISTER_CUS_QUERY = "insert into m_customer_details values(?,?,?,?,?)";
 	public static final String Auth_EMPLOYEE_QUERY = "select name from m_employee_details where email = ? and password = ?";
+	public static final String DUE_AMOUNT_QUERY = "select email,sum(lend_amount) as total_amount  from m_bill_details group by email having sum(lend_amount) > 0";
+	public static final String GET_EMP_ATTENDENCE_QUERY = "select sum(attendence) from emp_attendence group by emp_id having emp_id = (select emp_id from m_employee_details where email = ?)";
+	public static final String GET_EMP_SALARY_QUERY = "select salary/26 from m_employee_details where email = ?";
+	public static final String UPDATE_PASSWORD_QUERY = "update m_employee_details set password = ? where email = ? and password = ?";
 }

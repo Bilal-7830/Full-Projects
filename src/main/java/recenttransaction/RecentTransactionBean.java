@@ -7,6 +7,15 @@ public class RecentTransactionBean {
 	private String billId;
 	private float amount;
 	private float lendAmount;
+	private Date date;
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public String getEmail() {
 		return email;

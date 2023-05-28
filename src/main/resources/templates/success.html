@@ -81,14 +81,18 @@
         </div>
     </nav>
     <!-- Navbar end -->
+    <br>
     <center>
-    <div class="card m-5" style="width: 18rem;">
-        <img src="Images/success.png" class="card-img-top" alt="..." height="250px">
-        <div class="card-body">
-            <p class="card-text">Action successfully Done!</p>
-            <a th:href="@{index}" class="btn btn-primary">Go Back to Home</a>
+        <div class="card m-5" style="width: 18rem;">
+            <img src="Images/success.png" class="card-img-top" alt="..." height="250px">
+            <div class="card-body">
+                <p class="card-text text-success" th:text="${action}"></p>
+                <a th:href="@{index}" class="btn btn-primary">Go Back to Home</a>
+            </div>
         </div>
-    </div></center>
+    </center>
+    <br>
+
     <!-- Adding footer section -->
     <footer class="text-center text-white mt-3" id="Footer">
         <!-- Grid container -->

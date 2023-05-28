@@ -7,13 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import nearexpired.MedicineDetailBean;
+import org.slf4j.Logger;
+
+import utils.AppLogger;
 import utils.CloseResources;
 import utils.DBConnection;
 import utils.QueryUtil;
 
 public class GenerateOrderDao {
 	public static List<OrderDetailBean> generateOrderList() {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
+		logger.info("Generating orders ../../..-./--./-==>>>");
 		List<OrderDetailBean> result = new ArrayList<>();
 		Connection con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
@@ -35,6 +40,7 @@ public class GenerateOrderDao {
 				System.out.println("price = "+rs.getFloat("price"));
 				result.add(medicineDetail);
 			}
+			logger.info("Order Generated successfully!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

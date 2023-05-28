@@ -52,6 +52,7 @@ public class RecentTransactionDao {
 				bean.setBillId(rs.getString("bill_pid"));
 				bean.setAmount(rs.getFloat("amount"));
 				bean.setLendAmount(rs.getFloat("lend_amount"));
+				bean.setDate(rs.getDate("b_date"));
 				result.add(bean);
 			}
 		} catch (SQLException e) {

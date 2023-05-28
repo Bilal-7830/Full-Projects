@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class DBConnection {
-	
 	public static Connection createConnection() {
 		
 		String url="jdbc:postgresql://pgdb.veapp.net:5440/training_2023";
@@ -36,6 +35,7 @@ public class DBConnection {
 				if(sc!=null) sc.close();
 			}
 		}
+
 		return conn;
 	}
 }

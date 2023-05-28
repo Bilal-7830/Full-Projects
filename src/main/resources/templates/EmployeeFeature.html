@@ -65,44 +65,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                     <li class="nav-item mx-2"></li>
                     <a class="nav-link active" aria-current="page" th:href="@{index}">
                         <div id="text">Home</div>
                     </a>
+                </ul>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-dark logout mx-5" type="button" > <a th:href="@{index}"> <div id="text">Log out</div> </a></button>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <div id="text">Login</div>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{AdminLogin}">Admin Login</a></li>
-                            <li><a class="dropdown-item" th:href="@{EmployeeLogin}">Employee Login</a></li>
-                            <li><a class="dropdown-item" th:href="@{CustomerLogin}">Customer Login</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active mx-2" th:href="@{Register}" tabindex="-1" aria-disabled="true">
-                            <div id="text">Register Customer</div>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link active mx-2" th:href="@{ContactUs}" tabindex="-1" aria-disabled="true">
-                            <div id="text">Contact us</div>
-                        </a>
-                    </li>
-
+                </ul>
             </div>
         </div>
     </nav>
     <!-- Navbar end -->
-    <!-- Adding welcome section  -->
     <center>
-        <h1 style="color:rebeccapurple">Welcome {{name}}</h1>
+        <h1 th:text="${welcome}" style="color:rebeccapurple"></h1>
         <h1>Here are some Features that you can access</h1>
     </center>
-    <!-- Adding admin features -->
+    <!-- Adding welcome section  -->
+
+    <!-- Adding employee features -->
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -181,13 +165,55 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's
                             content.</p>
-                        <a th:href="@{Table}" class="btn btn-primary">Calculate</a>
+                        <a th:href="@{NearExpireTable}" class="btn btn-primary">Calculate</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- 3rd container -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card ms-5" style="width: 18rem;">
+                    <img src="Images/attendence.jpg" class="card-img-top" id="img" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">See your present</h5>
+                        <p class="card-text">By clicking on see button you will see how much days you are present </p>
+                        <a th:href="@{SeePresent}" class="btn btn-primary">See</a>
+                        <p th:text = "${presents}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card ms-5" style="width: 18rem;">
+                    <img src="Images/change.png" class="card-img-top" id="img" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Change Password</h5>
+                        <p class="card-text">By clicking on the button change you will be able to change your password
+                        </p>
+                        <a th:href="@{ChangePassword}" class="btn btn-primary">Change</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 2 -->
+
+            <!-- 3 -->
+            <div class="col-md-4">
+                <div class="card ms-5" style="width: 18rem;">
+                    <img src="Images/salary.jpg" class="card-img-top" id="img" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Salary</h5>
+                        <p class="card-text">By clicking on see button you will be able to see how much money you have
+                            earned till now</p>
+                        <a th:href="@{CalculateSalary}" class="btn btn-primary">See</a>
+                        <p th:text="${amount}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Adding footer section -->
     <footer class="text-center text-white mt-3" id="Footer">
         <!-- Grid container -->

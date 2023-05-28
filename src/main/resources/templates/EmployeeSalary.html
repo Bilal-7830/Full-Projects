@@ -148,7 +148,7 @@ and a padding-bottom equal to the height of the footer */
                 </tr>
             </thead>
             <tbody>
-                <form th:action="@{DoneSalary}" method="post">
+                <form th:action="@{DoneSalary}" method="POST">
                     <tr th:each="item : ${data}">
                         <td th:text="${item.empId}"></td>
                         <td th:text="${item.presents}"></td>

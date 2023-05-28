@@ -12,7 +12,11 @@ public class ResponseMessages {
 	public final static String USER_MISSING = "Credentials don't match";
 	public final static String USER_FOUND = "Credentials matched";
 	
-	public final static String EMP_ADDED = "Employee Added successfully";
+	public final static String EMP_ADDED = "Employee Registered successfully";
 	public final static String EMP_UPDATED = "Executive Updated";
 	public final static String DUPLICATE_VALUE = "Duplicacy occurs please enter unique phone number and email";
+	public final static String OTP_EMIAL = "Welcome to Registration process of Sehat Era Pharmacy"
+			+ "\nYour OTP for registration is : ";
+	public final static String OTP_BILL = "Your otp for generate bill is : ";
+	public final static String INVALID_OTP = "OTP not match please try again";
 }

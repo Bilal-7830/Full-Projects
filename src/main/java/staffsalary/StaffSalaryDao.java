@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+
+import utils.AppLogger;
 import utils.CloseResources;
 import utils.DBConnection;
 import utils.MemCache;
@@ -15,11 +18,14 @@ import utils.QueryUtil;
 
 public class StaffSalaryDao {
 	public static List<EmpSalaryBean> getSalaryDetails() {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
 		List<EmpSalaryBean> result = new ArrayList<>();
 		Connection con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
 		ResultSet rs = null;
 		try {
+			logger.info("Getting employe list");
 			pdsm = con.prepareStatement(QueryUtil.STAFF_SALARY_QUERY);
 			rs = pdsm.executeQuery();
 			while (rs.next()) {
@@ -40,6 +46,7 @@ public class StaffSalaryDao {
 				MemCache.addToMemcache(empId, payableSalary);
 				result.add(salaryBean);
 			}
+			logger.info("Emp list GOt successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -49,6 +56,8 @@ public class StaffSalaryDao {
 	}
 
 	public static void logInDb(String emp_id, float amount, Date date) throws SQLException {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
 		Connection con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
 		
@@ -59,9 +68,8 @@ public class StaffSalaryDao {
 			pdsm.setFloat(cnt++, amount);
 			pdsm.setDate(cnt++, date);
 			pdsm.execute();
-			System.out.println("payrole logged successfully");
+			logger.info("Salary logged in DB successfully");
 
 			CloseResources.close(con, pdsm);
 	}
-
 }

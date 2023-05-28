@@ -18,7 +18,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             margin-top: 10px;
 
@@ -134,40 +134,29 @@ and a padding-bottom equal to the height of the footer */
     <!-- adding table-->
 
     <center>
-        <h1>Medicine Bill</h1>
+        <h1> Your payments</h1>
     </center>
-    <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Medicine Name</th>
-                    <th>Order Quantity</th>
-                    <th>MRP</th>
-                    <th>Price</th>
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Bill Id </th>
+                <th>Amount</th>
+                <th>Lend Amount</th>
+                <th> Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${data}">
+                <td th:text="${item.email}"></td>
+                <td th:text="${item.billId}"></td>
+                <td th:text="${item.amount}"></td>
+                <td th:text="${item.lendAmount}"></td>
+                <td th:text="${item.date}"></td>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${data}">
-                    <td th:text="${item.category}"></td>
-                    <td th:text="${item.medicineName}"></td>
-                    <td th:text="${item.quantity}"></td>
-                    <td th:text="${item.price}"></td>
-                    <td th:text="${item.totalPrice}"></td>
-                </tr>
-                <tr>
-                    
-                        <td colspan="5">
-                            <center><p th:text="${total}"></p></center>
-                        </td>
-                    
-                    
-                </tr>
-            </tbody>
-        </table>
-        <p th:text="${errorMessage}"></p>
-    </div>
+            </tr>
+        </tbody>
+    </table>
     <!-- Adding footer section -->
     <div id="wrapper">
         <footer class="text-center text-white mt-3" id="Footer">
@@ -259,5 +248,3 @@ and a padding-bottom equal to the height of the footer */
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 </body>
-
-</html>

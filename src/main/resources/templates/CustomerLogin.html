@@ -93,14 +93,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3"></div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-4">
         <h1>Customer Login</h1>
         <DIV STYLE="background-color:#000000; height:5px; width:100%;"></DIV>
-        <form th:action="@{CustomerAuth}">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name = "name">
-          </div>
+        <form th:action="@{CustomerAuth}" method="POST">
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name = "email">

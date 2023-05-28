@@ -133,7 +133,7 @@
       </tr>
     </thead>
     <tbody>
-      <form th:action="@{SetAttendence}">
+      <form th:action="@{SetAttendence}" method="POST" >
         <tr th:each="item : ${data}">
           <td th:text="${item.empName}"></td>
           <td th:text="${item.empId}"></td>

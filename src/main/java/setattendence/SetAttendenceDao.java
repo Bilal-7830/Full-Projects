@@ -9,12 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
+import utils.AppLogger;
 import utils.CloseResources;
 import utils.DBConnection;
 import utils.QueryUtil;
 
 public class SetAttendenceDao {
 	public static List<EmpNamePhoneBean> getEmpList() {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
+		logger.info("::::Generate emp list for attendence:::---/--/.");
 		List<EmpNamePhoneBean> result = new ArrayList<>();
 		Connection con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
@@ -35,10 +41,13 @@ public class SetAttendenceDao {
 		} finally {
 			CloseResources.close(con, rs, pdsm);
 		}
+		logger.info("List Generated successfully");
 		return result;
 	}
 
 	public static boolean isSetAttendence(String[] empIds, String[] attendences) {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
 		Map<String, Float> hm = new HashMap<>();
 		hm.put("present", 1.0f);
 		hm.put("half", 0.5f);
@@ -46,6 +55,7 @@ public class SetAttendenceDao {
 		Connection con = DBConnection.createConnection();
 		PreparedStatement pdsm = null;
 		try {
+			logger.info("setting attendence===./././");
 			for (int i = 0; i < empIds.length; i++) {
 				String empId = empIds[i];
 				float attendence = hm.get(attendences[i]);
@@ -56,8 +66,9 @@ public class SetAttendenceDao {
 				pdsm.setFloat(cnt++, attendence);
 				pdsm.executeUpdate();
 			}
+			logger.info("Attendence setted to DB successfully");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 			return false;
 		} finally {
 			CloseResources.close(con, null, pdsm);

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+<head xmlns:th="http://www.thymeleaf.org">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sehat Era pharmacy</title>
@@ -44,48 +44,30 @@
     <!-- adding navbar -->
     <nav class="navbar navbar-expand-lg navbar-light mt-3" id="navbar">
         <div class="container-fluid me-2">
-          <a class="navbar-brand" href="#"><img src="Images/Logo.PNG" alt="" height="100px" width="450px"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">
-                  <div>Home</div>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <div>Login</div>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="AdminLogin.html">Admin Login</a></li>
-                  <li><a class="dropdown-item" href="EmployeeLogin.html">Employee Login</a></li>
-                  <li><a class="dropdown-item" href="CustomerLogin.html">Customer Login</a></li>
+            <a class="navbar-brand" href="#"><img src="Images/Logo.PNG" alt="" height="100px" width="450px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <li class="nav-item mx-2"></li>
+                    <a class="nav-link active" aria-current="page" th:href="@{index}">
+                        <div id="text">Home</div>
+                    </a>
                 </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active mx-2" href="Register.html" tabindex="-1" aria-disabled="true">
-                  <div>Register Customer</div>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active mx-2" href="ContactUs.html" tabindex="-1" aria-disabled="true">
-                  <div>Contact us</div>
-                </a>
-              </li>
-            </ul>
-          </div>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-danger logout" type="button" href="/logout">Logout</button>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
-      
-    <br>
-    <br>
-    <br>
-    <!-- Navbar end -->
+    </nav>
+    
+    
+
     <!--Adding Login form  -->
     <div class="container">
         <div class="row">

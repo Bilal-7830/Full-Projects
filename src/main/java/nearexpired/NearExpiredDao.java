@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+
+import utils.AppLogger;
 import utils.DBConnection;
 import utils.QueryUtil;
 
 public class NearExpiredDao {
 	public static List<MedicineDetailBean> nearExpiredMedicines() {
+		AppLogger appLogger = new AppLogger();
+		Logger logger = appLogger.getLogger();
 		List<MedicineDetailBean> result = new ArrayList<>();
 		Connection con = DBConnection.createConnection();
 		Date kini = new Date();
@@ -23,6 +28,7 @@ public class NearExpiredDao {
 			pdsm = con.prepareStatement(QueryUtil.NEAR_EXPIRE_QUERY);
 			pdsm.setDate(1, expDate);
 			rs = pdsm.executeQuery();
+			logger.info("Getting nearly expire medicines=../.../......");
 			while (rs.next()) {
 				MedicineDetailBean medicineDetail = new MedicineDetailBean();
 				medicineDetail.setMedicineName(rs.getString("medicine_name"));
@@ -37,8 +43,11 @@ public class NearExpiredDao {
 
 				result.add(medicineDetail);
 			}
+			if(result != null) {
+				logger.info("List Generated successfullu");
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Cant get results" + e.getMessage());
 		} finally {
 			try {
 				con.close();
@@ -51,7 +60,5 @@ public class NearExpiredDao {
 		}
 		return result;
 	}
-
-
 
 }
